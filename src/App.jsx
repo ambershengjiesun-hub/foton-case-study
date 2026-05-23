@@ -78,11 +78,37 @@ export default function App() {
               ['foton','Case Study']
             ].map(([key,label]) => (
               <button key={key} onClick={() => switchTab(key)}
-                className={`text-sm font-medium pb-1 transition-colors ${mainTab === key ? 'text-white border-b-2 border-brand-blue' : 'text-gray-400 hover:text-gray-300'}`}>{label}</button>
+                className={`text-base font-semibold pb-1 transition-colors ${mainTab === key ? 'text-white border-b-2 border-brand-blue' : 'text-gray-500 hover:text-gray-300'}`}>{label}</button>
             ))}
           </div>
         </div>
       </header>
+
+      {/* Case Study sub-nav */}
+      {mainTab === 'foton' && (
+        <div className="bg-surface-900 border-b border-gray-800 shrink-0">
+          <div className="max-w-4xl mx-auto px-6 py-1.5 flex items-center justify-center gap-6 text-xs">
+            <button onClick={() => setPanel('story')} className={`transition-colors ${panel === 'story' ? 'text-white' : 'text-gray-600 hover:text-gray-400'}`}>Storyline</button>
+            <span className="text-gray-700">|</span>
+            {[
+              ['AS IS', ['context'], 'text-red-400'],
+              ['TO BE', ['methodology','system'], 'text-brand-blue-light'],
+              ['PILOT', ['pilot','experience'], 'text-emerald-400'],
+            ].map(([label, pages, color]) => {
+              const active = pages.includes(panel)
+              return (
+                <span key={label} className="flex items-center gap-3">
+                  <button onClick={() => setPanel(pages[0])}
+                    className={`uppercase tracking-widest font-bold transition-colors ${active ? color : 'text-gray-600 hover:text-gray-400'}`}>
+                    {label}
+                  </button>
+                  {label !== 'PILOT' && <span className="text-gray-700">·</span>}
+                </span>
+              )
+            })}
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-1 overflow-hidden">
         <aside className="w-52 bg-surface-950 border-r border-gray-800 shrink-0 hidden md:flex flex-col overflow-y-auto">
@@ -249,18 +275,19 @@ function Skills() { return (
 
 // ==================== FOTON ====================
 function FotonPanel({ panel, onNavigate }) {
+  const back = () => onNavigate('story')
   switch(panel) {
     case 'story': return <Storyline onNavigate={onNavigate} />;
-    case 'context': return <Context />;
-    case 'methodology': return <Methodology />;
-    case 'system': return <System />;
-    case 'experience': return <Experience />;
-    case 'pilot': return <Pilot />;
+    case 'context': return <Context onBack={back} />;
+    case 'methodology': return <Methodology onBack={back} />;
+    case 'system': return <System onBack={back} />;
+    case 'experience': return <Experience onBack={back} />;
+    case 'pilot': return <Pilot onBack={back} />;
     default: return <Storyline onNavigate={onNavigate} />;
   }
 }
 
-function Title({ label, title }) { return <div className="flex items-center gap-3 mb-4"><span className="text-xs font-bold text-brand-blue bg-brand-blue/10 px-2 py-1 rounded">{label}</span><h2 className="text-3xl font-bold">{title}</h2></div> }
+function Title({ label, title, onBack }) { return <div className="flex items-center gap-3 mb-4"><span className="text-xs font-bold text-brand-blue bg-brand-blue/10 px-2 py-1 rounded">{label}</span><h2 className="text-3xl font-bold">{title}</h2>{onBack && <button onClick={onBack} className="ml-auto text-xs text-gray-500 hover:text-brand-blue-light transition-colors border border-gray-700 rounded-full px-3 py-1">← Storyline</button>}</div> }
 
 // --- STORYLINE ---
 function Storyline({ onNavigate }) { return (
@@ -268,44 +295,63 @@ function Storyline({ onNavigate }) { return (
     <h2 className="text-4xl font-bold tracking-tight mb-8">Case Study</h2>
 
     <div className="space-y-4">
-      {/* PROBLEM */}
-      <div className="rounded-xl border border-red-500/20 bg-red-500/[0.06] px-5 py-3 flex items-center gap-5">
-        <div className="w-16 shrink-0 text-xs font-bold text-red-400 uppercase tracking-widest text-right">AS IS</div>
-        <div className="flex-1 grid grid-cols-3 gap-4">
+      {/* AS IS */}
+      <div className="rounded-xl border border-red-500/20 bg-red-500/[0.06] px-5 py-3 flex items-center gap-5 h-[88px]">
+        <div className="shrink-0 flex flex-col items-center w-14">
+          <div className="w-10 h-10 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center mb-1">
+            <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="#f87171" strokeWidth="1.5"/><line x1="10" y1="5" x2="10" y2="11" stroke="#f87171" strokeWidth="1.5"/><circle cx="10" cy="14" r="0.8" fill="#f87171"/></svg>
+          </div>
+          <span className="text-xs font-bold text-red-400 tracking-widest">AS IS</span>
+        </div>
+        <div className="flex-1 grid grid-cols-3 gap-4 h-full">
           {[['竞争升级','比亚迪·吉利入局'],['用户跃迁','乘用车体验期望'],['品牌向上','从工具到品牌']].map(([t,s]) => (
-            <div key={t} onClick={() => onNavigate('context')} className="bg-surface-900 border border-gray-700 rounded-lg px-4 py-2 cursor-pointer hover:border-red-400/50 transition-colors text-center">
-              <div className="text-white font-bold text-sm">{t}</div><div className="text-xs text-gray-400 mt-0.5">{s}</div>
+            <div key={t} onClick={() => onNavigate('context')} className="bg-surface-900 border border-gray-700 rounded-lg px-4 py-2 cursor-pointer hover:border-red-400/50 transition-colors text-center flex flex-col justify-center h-full">
+              <div className="text-white font-bold text-sm whitespace-nowrap">{t}</div><div className="text-xs text-gray-400 mt-0.5 whitespace-nowrap">{s}</div>
             </div>
           ))}
         </div>
       </div>
 
-      <Connector />
+      <div className="flex justify-center py-1">
+        <span className="text-gray-700 text-sm">↓</span>
+      </div>
 
-      {/* APPROACH */}
-      <div className="rounded-xl border border-brand-blue/20 bg-brand-blue/[0.04] px-5 py-3 flex items-center gap-5">
-        <div className="w-16 shrink-0 text-xs font-bold text-brand-blue-light uppercase tracking-widest text-right">TO BE</div>
-        <div className="flex-1 grid grid-cols-4 gap-3">
+      {/* TO BE */}
+      <div className="rounded-xl border border-brand-blue/20 bg-brand-blue/[0.04] px-5 py-3 flex items-center gap-5 h-[88px]">
+        <div className="shrink-0 flex flex-col items-center w-14">
+          <div className="w-10 h-10 rounded-lg bg-brand-blue/20 border border-brand-blue/30 flex items-center justify-center mb-1">
+            <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" fill="none" stroke="#6DB8F0" strokeWidth="1.5"/><circle cx="10" cy="10" r="3" fill="none" stroke="#6DB8F0" strokeWidth="1.5"/><line x1="10" y1="2" x2="10" y2="5" stroke="#6DB8F0" strokeWidth="1.5"/></svg>
+          </div>
+          <span className="text-xs font-bold text-brand-blue-light tracking-widest">TO BE</span>
+        </div>
+        <div className="flex-1 grid grid-cols-4 gap-3 h-full">
           {[
-            ['全生命周期闭环','定义→开发→评测→追踪→反哺','methodology'],
+            ['全生命周期闭环','定义→开发→评测→追踪','methodology'],
             ['大数据+小数据','双引擎驱动洞察','methodology'],
             ['平台架构','数据→分析→应用','system'],
             ['用户画像矩阵','5类商用车群体','system'],
           ].map(([t,s,to]) => (
-            <div key={t} onClick={() => onNavigate(to)} className="bg-surface-900 border border-gray-700 rounded-lg px-3 py-2.5 cursor-pointer hover:border-brand-blue/50 transition-colors text-center">
-              <div className="text-white font-bold text-sm">{t}</div><div className="text-xs text-gray-400 mt-0.5">{s}</div>
+            <div key={t} onClick={() => onNavigate(to)} className="bg-surface-900 border border-gray-700 rounded-lg px-3 py-2.5 cursor-pointer hover:border-brand-blue/50 transition-colors text-center flex flex-col justify-center h-full">
+              <div className="text-white font-bold text-sm whitespace-nowrap">{t}</div><div className="text-xs text-gray-400 mt-0.5 whitespace-nowrap">{s}</div>
             </div>
           ))}
         </div>
       </div>
 
-      <Connector />
+      <div className="flex justify-center py-1">
+        <span className="text-gray-700 text-sm">↓</span>
+      </div>
 
       {/* Pilot */}
-      <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] px-5 py-3 flex items-center gap-5">
-        <div className="w-16 shrink-0 text-xs font-bold text-emerald-400 uppercase tracking-widest text-right">Pilot</div>
-        <div className="flex-1">
-          <div onClick={() => onNavigate('pilot')} className="bg-surface-900 border border-gray-700 rounded-lg px-4 py-2 cursor-pointer hover:border-emerald-400/50 transition-colors text-center">
+      <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] px-5 py-3 flex items-center gap-5 h-[88px]">
+        <div className="shrink-0 flex flex-col items-center w-14">
+          <div className="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mb-1">
+            <svg width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 18,10 14,10 14,17 6,17 6,10 2,10" fill="none" stroke="#34d399" strokeWidth="1.5" strokeLinejoin="round"/></svg>
+          </div>
+          <span className="text-xs font-bold text-emerald-400 tracking-widest">PILOT</span>
+        </div>
+        <div className="flex-1 h-full">
+          <div onClick={() => onNavigate('pilot')} className="bg-surface-900 border border-gray-700 rounded-lg px-4 py-2 cursor-pointer hover:border-emerald-400/50 transition-colors text-center flex flex-col justify-center h-full">
             <div className="text-white font-bold text-sm">欧曼银河试点</div>
             <div className="text-xs text-gray-400 mt-0.5">从数据整合到看板上线，跑通最小闭环</div>
           </div>
@@ -313,27 +359,13 @@ function Storyline({ onNavigate }) { return (
       </div>
     </div>
 
-    {/* Experience proof strip */}
-    <div onClick={() => onNavigate('experience')} className="mt-10 text-center cursor-pointer group">
-      <span className="text-xs text-gray-500">项目经验</span>
-      <span className="text-xs text-gray-600 mx-2">·</span>
-      <span className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors">
-        大众 VOC 60%→90%+  ·  大众 PQ 85%→95%  ·  宝马 DAU 26万+  ·  奥迪 OTA 140万辆
-      </span>
-    </div>
-  </div>
-)}
-
-function Connector() { return (
-  <div className="flex justify-center py-2">
-    <div className="w-px h-5 bg-gray-600" />
   </div>
 )}
 
 // --- CONTEXT ---
-function Context() { return (
+function Context({ onBack }) { return (
   <div className="max-w-4xl mx-auto px-[3vw] py-[2.5vh] h-full flex flex-col justify-center">
-    <Title label="AS IS" title="背景分析" />
+    <Title label="AS IS" title="背景分析" onBack={onBack} />
     <div className="grid grid-cols-4 gap-3 mb-5">
       {[{v:'65万辆',l:'2025总销量',c:'+5.85%'},{v:'17%',l:'市占率',c:'+1.6ppt'},{v:'14.2万辆',l:'重卡',c:'+103.6%'},{v:'10.1万辆',l:'新能源',c:'+87%'}].map(m => (
         <div key={m.l} className="bg-surface-900/50 border border-gray-800 rounded-xl p-4 text-center"><div className="text-xs text-gray-400">{m.l}</div><div className="text-2xl font-bold mt-1">{m.v}</div><div className="text-xs text-emerald-400 mt-1">{m.c}</div></div>
@@ -341,7 +373,7 @@ function Context() { return (
     </div>
     <div className="grid grid-cols-3 gap-4 mb-5">
       {[{c:'border-t-red-500',t:'竞争维度升级',d:'比亚迪、吉利等乘用车巨头带着用户思维进入商用车'},{c:'border-t-amber-500',t:'用户期望跃迁',d:'司机受乘用车智舱/智驾影响，对舒适性、智能化要求全面提升'},{c:'border-t-brand-blue',t:'品牌向上攻坚',d:'欧曼银河产品力到位，品牌感知需要消费者洞察驱动'}].map(ch => (
-        <div key={ch.t} className={`bg-surface-900 border border-gray-800 rounded-xl p-3 border-t-2 ${ch.c}`}><div className="font-bold text-sm mb-1.5">{ch.t}</div><p className="text-xs text-gray-300 leading-relaxed">{ch.d}</p></div>
+        <div key={ch.t} className={`bg-surface-900 border border-gray-800 rounded-xl p-3.5 border-t-2 ${ch.c}`}><div className="font-bold text-sm mb-1.5">{ch.t}</div><p className="text-xs text-gray-300 leading-relaxed">{ch.d}</p></div>
       ))}
     </div>
     <div className="bg-surface-900 border border-gray-800 rounded-xl overflow-hidden mb-4">
@@ -361,10 +393,10 @@ function Context() { return (
 )}
 
 // --- METHODOLOGY (Lifecycle + Method combined) ---
-function Methodology() {
+function Methodology({ onBack }) {
   return (
     <div className="max-w-4xl mx-auto px-[3vw] py-[2.5vh] h-full flex flex-col justify-center">
-      <Title label="TO BE" title="方法论" />
+      <Title label="TO BE" title="方法论" onBack={onBack} />
 
       {/* Lifecycle - self-contained stages */}
       <div className="bg-surface-900 border border-gray-800 rounded-xl p-4 mb-5">
@@ -399,7 +431,7 @@ function Methodology() {
           <div className="bg-surface-950 border border-gray-700 rounded-lg p-4">
             <div className="text-sm font-bold mb-3 text-brand-blue-light">大数据引擎</div>
             <div className="space-y-2 text-xs">
-              {[['来源','舆情抓取、T-Box、客服日志、CRM'],['回答','什么问题？多少人？在哪？趋势？'],['产出','趋势监控、问题预警、用户分群、标签聚类'],['工具','LLM标注、情感分析、聚类算法']].map(([k,v]) => (
+              {[['来源','舆情抓取、T-Box、客服日志、CRM'],['回答','什么问题？多少人？在哪？趋势？'],['工具','LLM标注、情感分析、聚类算法'],['产出','趋势监控、问题预警、用户分群、标签聚类']].map(([k,v]) => (
                 <div key={k} className="flex gap-2"><span className="text-brand-blue shrink-0 w-8">{k}</span><span className="text-gray-400">{v}</span></div>
               ))}
             </div>
@@ -407,7 +439,7 @@ function Methodology() {
           <div className="bg-surface-950 border border-gray-700 rounded-lg p-4">
             <div className="text-sm font-bold mb-3 text-amber-400">小数据引擎</div>
             <div className="space-y-2 text-xs">
-              {[['来源','跟车访谈、焦点小组、可用性测试'],['回答','为什么？司机怎么想？根因？'],['产出','根因分析、体验洞察、需求验证'],['工具','语义提取、行为编码分析']].map(([k,v]) => (
+              {[['来源','跟车访谈、焦点小组、可用性测试'],['回答','为什么？司机怎么想？根因？'],['工具','语义提取、行为编码分析'],['产出','根因分析、体验洞察、需求验证']].map(([k,v]) => (
                 <div key={k} className="flex gap-2"><span className="text-amber-400 shrink-0 w-8">{k}</span><span className="text-gray-400">{v}</span></div>
               ))}
             </div>
@@ -433,10 +465,10 @@ function Methodology() {
 }
 
 // --- SYSTEM (Platform + Profiles combined) ---
-function System() { return (
+function System({ onBack }) { return (
   <div className="max-w-6xl mx-auto px-[3vw] py-[2.5vh] h-full flex flex-col justify-center">
-    <Title label="TO BE" title="体系搭建" />
-    <p className="text-gray-400 text-sm mb-6">以上方法论在福田全产品线的落地载体——数据平台为底座，用户画像为产出，支撑从重卡到轻卡的消费者洞察需求。后续试点以欧曼银河为切入点验证。</p>
+    <Title label="TO BE" title="体系搭建" onBack={onBack} />
+    <p className="text-gray-400 text-xs mb-5">以上方法论在福田全产品线的落地载体——数据平台为底座，用户画像为产出，支撑从重卡到轻卡的消费者洞察需求。后续试点以欧曼银河为切入点验证。</p>
 
     <div className="grid grid-cols-[1fr_auto_1fr] gap-4">
       {/* Left: Platform */}
@@ -502,10 +534,10 @@ function System() { return (
 )}
 
 // --- EXPERIENCE ---
-function Experience() { return (
+function Experience({ onBack }) { return (
   <div className="max-w-4xl mx-auto px-[3vw] py-[2.5vh] h-full flex flex-col justify-center">
-    <Title label="PILOT" title="过往项目经验印证" />
-    <p className="text-gray-400 text-sm mb-6">6年乘用车经验（大众/宝马/奥迪），底层方法论可迁移至商用车场景。</p>
+    <Title label="PILOT" title="过往项目经验印证" onBack={onBack} />
+    <p className="text-gray-400 text-xs mb-5">6年乘用车经验（大众/宝马/奥迪），底层方法论可迁移至商用车场景。</p>
     <div className="grid grid-cols-2 gap-3">
       {expTabs.filter(e => e.id !== 'exp5').map(e => (
         <div key={e.id} className={`bg-surface-900 border border-gray-800 rounded-xl p-4 border-l-2 ${e.color}`}>
@@ -537,22 +569,91 @@ function Experience() { return (
 )}
 
 // --- PILOT ---
-function Pilot() { return (
+function Pilot({ onBack }) { return (
   <div className="max-w-4xl mx-auto px-[3vw] py-[2.5vh] h-full flex flex-col justify-center">
-    <Title label="PILOT" title="快速启动：试点方案" />
-    <p className="text-gray-400 max-w-2xl mb-6 leading-relaxed"><span className="text-white font-medium">欧曼银河（重卡）</span>为切入点，快速跑通最小闭环。</p>
-    <div className="space-y-4">
-      {[
-        { m:'Phase 1', c:'bg-brand-blue/10 text-brand-blue border-brand-blue/20', t:'数据整合 + 画像搭建', items:['整合现有数据源：T-Box、售后、客服','接入三方舆情：卡车之家、抖音、快手、运满满','产出：用户画像V1.0 + 舆情基线'] },
-        { m:'Phase 2', c:'bg-amber-500/10 text-amber-400 border-amber-500/20', t:'洞察生成 + 小数据验证', items:['AI打标+情感分析上线，自动分类','选2-3痛点方向跟车深挖（油耗/舒适/空调）','产出：首份洞察季报+改进建议'] },
-        { m:'Phase 3', c:'bg-emerald-500/10 text-emerald-400 border-emerald-500/20', t:'看板上线 + 闭环扩展', items:['看板V1.0上线（舆情+画像+追踪）','改进项落地追踪，验证闭环效果','方法论推广至轻卡产品线'] },
-      ].map(p => (
-        <div key={p.m} className="bg-surface-900 border border-gray-800 rounded-xl p-4">
-          <div className="flex items-center gap-3 mb-4"><span className={`inline-block px-3 py-1 text-xs font-bold rounded-full border ${p.c}`}>{p.m}</span><span className="font-bold">{p.t}</span></div>
-          <div className="grid md:grid-cols-3 gap-3 text-sm">{p.items.map((s,i) => <div key={i} className="bg-surface-950 rounded-lg p-3 text-gray-300 border border-gray-700">{s}</div>)}</div>
-        </div>
-      ))}
-    </div>
+    <Title label="PILOT" title="试点方案：欧曼银河消费者洞察闭环" onBack={onBack} />
 
+    <div className="space-y-3">
+      {/* Phase 1 */}
+      <div className="bg-surface-900 border border-brand-blue/20 rounded-xl p-4 flex gap-4 items-start">
+        <div className="shrink-0 flex flex-col items-center gap-1">
+          <span className="w-9 h-9 bg-brand-blue rounded-full flex items-center justify-center text-xs font-bold text-white">01</span>
+          <span className="text-xs font-bold text-brand-blue-light">Phase 1</span>
+        </div>
+        <div className="flex-1">
+          <div className="text-sm font-bold text-white mb-1">数据整合与画像</div>
+          <p className="text-xs text-gray-500 mb-3">整合车内、三方、内部三类数据源，建立欧曼银河司机用户画像基线</p>
+          <div className="grid grid-cols-3 gap-2 text-xs">
+            <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
+              <div className="text-brand-blue-light font-medium mb-1">T-Box 车联网</div>
+              <p className="text-gray-400 leading-relaxed">GPS · 油耗 · 里程 · 故障码 · 驾驶行为 · 怠速时长 · 设施使用</p>
+            </div>
+            <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
+              <div className="text-brand-blue-light font-medium mb-1">三方舆情</div>
+              <p className="text-gray-400 leading-relaxed">卡车之家 · 抖音/快手 · 运满满货主反馈</p>
+            </div>
+            <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
+              <div className="text-brand-blue-light font-medium mb-1">内部系统</div>
+              <p className="text-gray-400 leading-relaxed">售后维修 · 400客服 · CRM 车主信息</p>
+            </div>
+          </div>
+          <div className="mt-2 text-xs"><span className="text-brand-blue font-medium">产出 </span><span className="text-gray-400">用户画像 V1.0 + 舆情监测基线报告</span></div>
+        </div>
+      </div>
+
+      {/* Phase 2 */}
+      <div className="bg-surface-900 border border-amber-500/20 rounded-xl p-4 flex gap-4 items-start">
+        <div className="shrink-0 flex flex-col items-center gap-1">
+          <span className="w-9 h-9 bg-amber-500 rounded-full flex items-center justify-center text-xs font-bold text-white">02</span>
+          <span className="text-xs font-bold text-amber-400">Phase 2</span>
+        </div>
+        <div className="flex-1">
+          <div className="text-sm font-bold text-white mb-1">洞察生成与验证</div>
+          <p className="text-xs text-gray-500 mb-3">AI 自动打标 + 聚类分群 + 小数据深挖，形成可落地的产品改进建议</p>
+          <div className="grid grid-cols-3 gap-2 text-xs">
+            <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
+              <div className="text-amber-400 font-medium mb-1">LLM 自动标注</div>
+              <p className="text-gray-400 leading-relaxed">场景 → 功能 → 情感 三级打标，识别高频投诉与情绪峰值</p>
+            </div>
+            <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
+              <div className="text-amber-400 font-medium mb-1">聚类分群</div>
+              <p className="text-gray-400 leading-relaxed">按运营路线、载重、油耗对司机分层画像</p>
+            </div>
+            <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
+              <div className="text-amber-400 font-medium mb-1">小数据深挖</div>
+              <p className="text-gray-400 leading-relaxed">大数据 Top 3 痛点 → 跟车访谈 + 实车测试 → 根因验证</p>
+            </div>
+          </div>
+          <div className="mt-2 text-xs"><span className="text-amber-400 font-medium">产出 </span><span className="text-gray-400">洞察季报 + Top 3 痛点改进建议报告</span></div>
+        </div>
+      </div>
+
+      {/* Phase 3 */}
+      <div className="bg-surface-900 border border-emerald-500/20 rounded-xl p-4 flex gap-4 items-start">
+        <div className="shrink-0 flex flex-col items-center gap-1">
+          <span className="w-9 h-9 bg-emerald-500 rounded-full flex items-center justify-center text-xs font-bold text-white">03</span>
+          <span className="text-xs font-bold text-emerald-400">Phase 3</span>
+        </div>
+        <div className="flex-1">
+          <div className="text-sm font-bold text-white mb-1">看板上线与推广</div>
+          <p className="text-xs text-gray-500 mb-3">四屏看板上线 + 闭环追踪 + 方法论文档化，并横向推广至其他产品线</p>
+          <div className="grid grid-cols-3 gap-2 text-xs">
+            <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
+              <div className="text-emerald-400 font-medium mb-1">洞察看板 V1.0</div>
+              <p className="text-gray-400 leading-relaxed">舆情趋势 · 用户画像 · 问题热力图 · 竞品动态</p>
+            </div>
+            <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
+              <div className="text-emerald-400 font-medium mb-1">闭环追踪</div>
+              <p className="text-gray-400 leading-relaxed">改进建议 → 研发采纳 → 效果回检</p>
+            </div>
+            <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
+              <div className="text-emerald-400 font-medium mb-1">横向推广</div>
+              <p className="text-gray-400 leading-relaxed">工具链与 SOP 推广至银河 5/5M、轻卡奥铃/时代</p>
+            </div>
+          </div>
+          <div className="mt-2 text-xs"><span className="text-emerald-400 font-medium">产出 </span><span className="text-gray-400">看板上线 + 方法论 SOP + 推广计划</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 )}
