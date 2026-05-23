@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #2A374A; border-radius: 3px; }
+  body { letter-spacing: -0.01em; }
+}
+
+@layer components {
+  .divider { @apply w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent; }
+}
