@@ -37,17 +37,17 @@ const lifecycleStages = [
 ]
 
 const expTabs = [
-  { id:'exp1', label:'趋势研究', color:'border-l-brand-blue', badge:'text-brand-blue', title:'行业趋势与用户需求研究', subtitle:'← 大众 VOC 平台 + 宝马数据整合', left:['大众 ICSD · VOC平台重建',['20+数据源整合（车质网/懂车帝/小红书等）','LLM自动打标 + 情绪分析 + SAE四级标签','AI准确率 60% → 90%+','季度报告CTO主动要求在全技术例会分享']], right:['宝马互联驾驶 · 多源整合',['车机埋点（DAU 26万+）+463通客服+经销商+590份问卷','发现方言区识别率低、CarPlay替代效应','洞察触达数十万级活跃用户']] },
-  { id:'exp2', label:'方法论', color:'border-l-amber-500', badge:'text-amber-400', title:'方法论建设与优化', subtitle:'← VW PQ 评测体系 + IPD 双通道测试法', left:['大众 PQ · 感知质量评测体系',['四层架构：体系→用例→模板→算法','7个场景+100+语料（含方言/英语）','唤醒率 85% → 95%','成为上市前必检标准']], right:['大众 IPD · 双通道测试法',['主通道：3个行为问题快速定位痛点','辅通道：仅对低分步骤回溯指标','解决200+指标 vs 5人/1周矛盾','客户评价"开拓了新的思路"']] },
-  { id:'exp3', label:'数据中台', color:'border-l-violet-500', badge:'text-violet-400', title:'数据中台与工具体系建设', subtitle:'← VW ICSD 技术升级', left:['LLM升级与标签体系',['推动 ChatGLM-6B → DeepSeek-V3 670B','引入SAE四级标签体系，重映射全部数据','Q4引入四象限分析矩阵','支撑PPE/PPC新平台上市策略']], right:['从数据到决策',['从"业务方不敢用"到"CTO主动分享"','最高技术例会向各产品线SM汇报','核心理念：分析前先验证数据可信度']] },
-  { id:'exp4', label:'画像应用', color:'border-l-emerald-500', badge:'text-emerald-400', title:'数据与用户画像应用', subtitle:'← 宝马用户行为洞察 + HU导航对标', left:['宝马数字钥匙洞察',['多源交叉分析：知晓率99%','完全依赖仅8%，47%习惯传统钥匙','画像直接驱动产品策略']], right:['宝马 HU 导航对标',['500份问卷+5组焦点小组20位车主','84功能惊喜时刻仅3.6%','建议被采纳用于下一代产品定义']] },
-  { id:'exp5', label:'统筹落地', color:'border-l-gray-500', badge:'text-gray-400', title:'大型项目统筹与跨部门落地', subtitle:'← 奥迪 OTA 统筹 + 埃森哲 6年顾问经验', single:['10个月统筹约140万辆OTA推送，安装成功率峰值近100%','协调德国供应商+中国南北合资公司，每周追踪、动态调整','PMP认证 + 6年+驻场顾问，善于在大型组织中推动洞察落地为决策'] },
+  { id:'exp1', label:'趋势研究', color:'border-l-brand-blue', badge:'text-brand-blue', title:'行业趋势与用户需求研究', subtitle:'← 大众 VOC 平台 + 宝马数据整合', foton:'→ 福田：舆情平台搭建、车联网数据整合，方法论直接复用', left:['大众 ICSD · VOC平台重建',['20+数据源整合（车质网/懂车帝/小红书等）','LLM自动打标 + 情绪分析 + SAE四级标签','AI准确率 60% → 90%+','季度报告CTO主动要求在全技术例会分享']], right:['宝马互联驾驶 · 多源整合',['车机埋点（DAU 26万+）+463通客服+经销商+590份问卷','发现方言区识别率低、CarPlay替代效应','洞察触达数十万级活跃用户']] },
+  { id:'exp2', label:'方法论', color:'border-l-amber-500', badge:'text-amber-400', title:'方法论建设与优化', subtitle:'← VW PQ 评测体系 + IPD 双通道测试法', foton:'→ 福田：商用车场景化评测标准建设，大众PQ四层架构可直接适配', left:['大众 PQ · 感知质量评测体系',['四层架构：体系→用例→模板→算法','7个场景+100+语料（含方言/英语）','唤醒率 85% → 95%','成为上市前必检标准']], right:['大众 IPD · 双通道测试法',['主通道：3个行为问题快速定位痛点','辅通道：仅对低分步骤回溯指标','解决200+指标 vs 5人/1周矛盾','客户评价"开拓了新的思路"']] },
+  { id:'exp3', label:'数据中台', color:'border-l-violet-500', badge:'text-violet-400', title:'数据中台与工具体系建设', subtitle:'← VW ICSD 技术升级', foton:'→ 福田：LLM选型与标签体系设计，大众ICSD经验避免从零踩坑', left:['LLM升级与标签体系',['推动 ChatGLM-6B → DeepSeek-V3 670B','引入SAE四级标签体系，重映射全部数据','Q4引入四象限分析矩阵','支撑PPE/PPC新平台上市策略']], right:['从数据到决策',['从"业务方不敢用"到"CTO主动分享"','最高技术例会向各产品线SM汇报','核心理念：分析前先验证数据可信度']] },
+  { id:'exp4', label:'画像应用', color:'border-l-emerald-500', badge:'text-emerald-400', title:'数据与用户画像应用', subtitle:'← 宝马用户行为洞察 + HU导航对标', foton:'→ 福田：商用车用户画像构建，宝马多源交叉验证方法可复用', left:['宝马数字钥匙洞察',['多源交叉分析：知晓率99%','完全依赖仅8%，47%习惯传统钥匙','画像直接驱动产品策略']], right:['宝马 HU 导航对标',['500份问卷+5组焦点小组20位车主','84功能惊喜时刻仅3.6%','建议被采纳用于下一代产品定义']] },
+  { id:'exp5', label:'统筹落地', color:'border-l-gray-500', badge:'text-gray-400', title:'大型项目统筹与跨部门落地', subtitle:'← 奥迪 OTA 统筹 + 埃森哲 6年顾问经验', foton:'→ 福田：大型国企跨部门推动洞察落地，奥迪OTA统筹经验可迁移', single:['10个月统筹约140万辆OTA推送，安装成功率峰值近100%','协调德国供应商+中国南北合资公司，每周追踪、动态调整','PMP认证 + 6年+驻场顾问，善于在大型组织中推动洞察落地为决策'] },
 ]
 
 // ==================== MAIN APP ====================
 export default function App() {
-  const [mainTab, setMainTab] = useState('profile')
-  const [panel, setPanel] = useState('about')
+  const [mainTab, setMainTab] = useState('foton')
+  const [panel, setPanel] = useState('story')
   const contentRef = useRef(null)
 
   useEffect(() => { if (contentRef.current) contentRef.current.scrollTop = 0 }, [panel, mainTab])
@@ -287,7 +287,7 @@ function FotonPanel({ panel, onNavigate }) {
   }
 }
 
-function Title({ label, title, onBack }) { return <div className="flex items-center gap-3 mb-4"><span className="text-xs font-bold text-brand-blue bg-brand-blue/10 px-2 py-1 rounded">{label}</span><h2 className="text-3xl font-bold">{title}</h2>{onBack && <button onClick={onBack} className="ml-auto text-xs text-gray-500 hover:text-brand-blue-light transition-colors border border-gray-700 rounded-full px-3 py-1">← Storyline</button>}</div> }
+function Title({ label, title, onBack }) { return <div className="flex items-center gap-3 mb-4">{label ? <span className="text-xs font-bold text-brand-blue bg-brand-blue/10 px-2 py-1 rounded">{label}</span> : null}<h2 className="text-3xl font-bold">{title}</h2>{onBack && <button onClick={onBack} className="ml-auto text-xs text-gray-500 hover:text-brand-blue-light transition-colors border border-gray-700 rounded-full px-3 py-1">← Storyline</button>}</div> }
 
 // --- STORYLINE ---
 function Storyline({ onNavigate }) { return (
@@ -372,23 +372,30 @@ function Context({ onBack }) { return (
       ))}
     </div>
     <div className="grid grid-cols-3 gap-4 mb-5">
-      {[{c:'border-t-red-500',t:'竞争维度升级',d:'比亚迪、吉利等乘用车巨头带着用户思维进入商用车'},{c:'border-t-amber-500',t:'用户期望跃迁',d:'司机受乘用车智舱/智驾影响，对舒适性、智能化要求全面提升'},{c:'border-t-brand-blue',t:'品牌向上攻坚',d:'欧曼银河产品力到位，品牌感知需要消费者洞察驱动'}].map(ch => (
+      {[{c:'border-t-red-500',t:'竞争维度升级',d:'比亚迪、吉利等乘用车巨头带着用户思维进入商用车'},{c:'border-t-amber-500',t:'用户期望跃迁',d:'商用车用户被乘用车智能化体验重塑期待——ADAS、座舱交互、远程控车——智能化功能在商用车场景中的真实需求优先级，成为竞争新变量'},{c:'border-t-brand-blue',t:'品牌向上攻坚',d:'欧曼银河产品力到位，品牌感知需要消费者洞察驱动'}].map(ch => (
         <div key={ch.t} className={`bg-surface-900 border border-gray-800 rounded-xl p-3.5 border-t-2 ${ch.c}`}><div className="font-bold text-sm mb-1.5">{ch.t}</div><p className="text-xs text-gray-300 leading-relaxed">{ch.d}</p></div>
       ))}
     </div>
-    <div className="bg-surface-900 border border-gray-800 rounded-xl overflow-hidden mb-4">
-      <table className="w-full text-sm"><thead><tr className="border-b border-gray-700 text-gray-400 text-xs uppercase tracking-wider"><th className="text-left py-2 px-4">产品线</th><th className="text-left py-2 px-4">定位</th><th className="text-left py-2 px-4">动力</th><th className="text-left py-2 px-4">场景</th><th className="text-left py-2 px-4">亮点</th></tr></thead>
-      <tbody className="divide-y divide-gray-700">
-        {[{n:'银河 9',p:'旗舰',c:'text-brand-blue-light',d:'混动/纯电/燃油',s:'干线物流、快递快运',h:'综合1000+马力'},{n:'银河 5/5M',p:'走量',c:'text-amber-400',d:'混动/燃油',s:'煤炭砂石、港口、城际',h:'比行业轻400kg'},{n:'银河 3/T',p:'入门/特种',c:'text-gray-400',d:'燃油/电动',s:'中短途支线/工程渣土',h:'B10寿命160万km'}].map(r => (
-          <tr key={r.n} className="hover:bg-white/[0.03]"><td className="py-2 px-4 font-semibold text-white text-xs">{r.n}</td><td className={`py-2 px-4 text-xs ${r.c}`}>{r.p}</td><td className="py-2 px-4 text-xs text-gray-300">{r.d}</td><td className="py-2 px-4 text-xs text-gray-300">{r.s}</td><td className="py-2 px-4 text-xs text-gray-300">{r.h}</td></tr>
-        ))}
-      </tbody></table>
-    </div>
-    <div className="border border-brand-blue/10 bg-brand-blue/[0.03] rounded-xl p-4">
+    <div className="border border-brand-blue/10 bg-brand-blue/[0.03] rounded-xl p-4 mb-4">
       <p className="text-sm text-gray-300 leading-relaxed">
-        💡 本方案以<span className="text-white font-medium">欧曼银河重卡</span>为核心分析对象——高端旗舰、品牌向上主战场、车联网数据基础好、用户触点多，最适合跑通消费者洞察闭环。
+        💡 本方案以<span className="text-white font-medium">欧曼银河重卡</span>为核心分析对象——高端旗舰、品牌向上主战场、车联网数据基础好、用户触点多，是福田内部跑通消费者洞察闭环<span className="text-white font-medium">性价比最高的选择</span>。以下四维展开论证。
       </p>
     </div>
+    <div className="space-y-2 mb-4">
+      {[
+        ['数据基础','T-Box 标配率高，车联网数据完整度在福田产品线中最好','不需从零搭建数据管道，整合现有数据即可起步'],
+        ['用户场景','覆盖干线/煤炭/冷链/城配四类核心场景','一套方法论验证后横向推广至轻卡、客车，复用价值最高'],
+        ['用户触点','司机日均运营 8-12h，使用强度高，痛点密度高','痛点密度高 → 洞察产出密度高 → 短期内能交出可见成果'],
+        ['增长势能','银河系列 1-4 月近 2 万辆，占欧曼重卡过半','在增长曲线上做洞察投入产出比最高，洞察直接服务增量决策'],
+      ].map(([tag, status, meaning]) => (
+        <div key={tag} className="bg-surface-900 border border-gray-800 rounded-lg p-3 flex items-start gap-3 hover:border-gray-700 transition-colors">
+          <span className="inline-block px-2 py-0.5 text-xs rounded bg-brand-blue/10 text-brand-blue border border-brand-blue/20 shrink-0 mt-0.5">{tag}</span>
+          <span className="text-xs text-white leading-relaxed flex-1">{status}<span className="text-gray-600 mx-2">→</span><span className="text-gray-300">{meaning}</span></span>
+        </div>
+      ))}
+    </div>
+
+    <p className="text-xs text-gray-600 text-center mt-5">以上锁定了分析对象和分析范围 → 以下展开消费者洞察体系的具体方案</p>
   </div>
 )}
 
@@ -424,6 +431,8 @@ function Methodology({ onBack }) {
         </div>
       </div>
 
+      <p className="text-xs text-gray-600 text-center my-3">五个阶段每个节点都需要洞察输入——大数据定位问题规模与趋势，小数据还原根因与场景。需求定义期偏小数据（跟车·访谈），上市追踪期偏大数据（舆情·T-Box），各节点比例不同但双引擎始终配合。</p>
+
       {/* Big + Small Data - all in one view */}
       <div className="bg-surface-900 border border-gray-800 rounded-xl p-4">
         <h3 className="text-sm font-bold text-white mb-4">大数据 + 小数据 双引擎</h3>
@@ -447,7 +456,7 @@ function Methodology({ onBack }) {
         </div>
         {/* Case example */}
         <div className="bg-surface-950 border border-gray-700 rounded-lg p-4">
-          <div className="text-xs text-gray-500 mb-3 uppercase tracking-wider">应用案例：欧曼银河空调投诉分析</div>
+          <div className="text-xs text-gray-500 mb-3 uppercase tracking-wider">案例示意：欧曼银河空调投诉分析 <span className="text-gray-600 ml-1">← 对应生命周期 Stage 4 · 上市后追踪</span></div>
           <div className="flex items-center gap-3 text-xs">
             <span className="inline-block px-2 py-0.5 rounded bg-brand-blue/10 text-brand-blue border border-brand-blue/20 shrink-0">大数据</span>
             <span className="text-gray-300">广东区域投诉两周环比 ↑ <span className="text-red-400 font-bold">42%</span></span>
@@ -457,6 +466,14 @@ function Methodology({ onBack }) {
             <span className="text-gray-600">→</span>
             <span className="inline-block px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">根因</span>
             <span className="text-gray-300">散热面积不足，华南工况超出设计边界</span>
+          </div>
+          <div className="flex items-center gap-3 text-xs mt-2">
+            <span className="text-gray-600">→</span>
+            <span className="inline-block px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20 shrink-0">改进</span>
+            <span className="text-gray-300">供应商切换加大散热芯体</span>
+            <span className="text-gray-600">→</span>
+            <span className="inline-block px-2 py-0.5 rounded bg-gray-500/10 text-gray-400 border border-gray-500/20 shrink-0">验证</span>
+            <span className="text-gray-300">3个月后同区域投诉回落至正常水平</span>
           </div>
         </div>
       </div>
@@ -468,7 +485,7 @@ function Methodology({ onBack }) {
 function System({ onBack }) { return (
   <div className="max-w-6xl mx-auto px-[3vw] py-[2.5vh] h-full flex flex-col justify-center">
     <Title label="TO BE" title="体系搭建" onBack={onBack} />
-    <p className="text-gray-400 text-xs mb-5">以上方法论在福田全产品线的落地载体——数据平台为底座，用户画像为产出，支撑从重卡到轻卡的消费者洞察需求。后续试点以欧曼银河为切入点验证。</p>
+    <p className="text-gray-400 text-xs mb-5">大数据+小数据的双引擎方法要在福田日常运转，需要两样基础设施——整合多源数据的平台（左），按商用车场景切分的用户画像体系（右）。</p>
 
     <div className="grid grid-cols-[1fr_auto_1fr] gap-4">
       {/* Left: Platform */}
@@ -488,7 +505,7 @@ function System({ onBack }) { return (
           <div className="text-center text-gray-600 text-xs">↑</div>
           <div className="bg-surface-950 border border-gray-700 rounded-lg p-3">
             <div className="text-xs font-bold text-gray-200 mb-1.5">数据层 · 多源数据整合</div>
-            <div className="flex flex-wrap gap-1.5">{['三方舆情','车联网 T-Box','售后/客服','销售 CRM','调研数据'].map(t => <span key={t} className="inline-block px-2 py-0.5 text-xs rounded bg-surface-800 text-gray-400 border border-gray-600">{t}</span>)}</div>
+            <div className="flex flex-wrap gap-1.5">{['公开舆情','车联网 T-Box','售后/客服','销售 CRM','调研数据'].map(t => <span key={t} className="inline-block px-2 py-0.5 text-xs rounded bg-surface-800 text-gray-400 border border-gray-600">{t}</span>)}</div>
           </div>
         </div>
         <div className="mt-4 pt-3 border-t border-gray-700 text-xs text-gray-500 text-center">
@@ -530,13 +547,24 @@ function System({ onBack }) { return (
         </div>
       </div>
     </div>
+
+    {/* Small data feedback loop */}
+    <div className="mt-5 border border-amber-500/10 bg-amber-500/[0.03] rounded-lg p-3 text-center text-xs text-gray-400">
+      看板监测到异常（如某区域投诉环比↑42%）
+      <span className="text-gray-600 mx-1.5">→</span>
+      触发<strong className="text-white font-medium">跟车访谈 / 焦点小组 / 实车测试</strong>定向深挖
+      <span className="text-gray-600 mx-1.5">→</span>
+      根因结论<strong className="text-white font-medium">标注回画像系统</strong>
+      <span className="text-gray-600 mx-1.5">→</span>
+      调研结果不再是一次性的，用户认知持续积累
+    </div>
   </div>
 )}
 
 // --- EXPERIENCE ---
 function Experience({ onBack }) { return (
   <div className="max-w-4xl mx-auto px-[3vw] py-[2.5vh] h-full flex flex-col justify-center">
-    <Title label="PILOT" title="过往项目经验印证" onBack={onBack} />
+    <Title label="" title="过往项目经验印证" onBack={onBack} />
     <p className="text-gray-400 text-xs mb-5">6年乘用车经验（大众/宝马/奥迪），底层方法论可迁移至商用车场景。</p>
     <div className="grid grid-cols-2 gap-3">
       {expTabs.filter(e => e.id !== 'exp5').map(e => (
@@ -553,6 +581,7 @@ function Experience({ onBack }) { return (
               <ul className="space-y-0.5 text-gray-400">{e.right[1].map((s,i) => <li key={i}>· {s}</li>)}</ul>
             </div>
           </div>
+          {e.foton && <div className="text-xs text-brand-blue-light mt-2 pt-2 border-t border-gray-700">{e.foton}</div>}
         </div>
       ))}
     </div>
@@ -562,6 +591,7 @@ function Experience({ onBack }) { return (
         <div className={`text-xs ${e.badge} font-medium mb-1`}>{e.title}</div>
         <div className="text-xs text-gray-400 mb-2">{e.subtitle}</div>
         <div className="text-xs text-gray-400 space-y-0.5">{e.single.map((s,i) => <p key={i}>· {s}</p>)}</div>
+        {e.foton && <div className="text-xs text-brand-blue-light mt-2 pt-2 border-t border-gray-700">{e.foton}</div>}
       </div>
     )})()}
 
@@ -589,8 +619,8 @@ function Pilot({ onBack }) { return (
               <p className="text-gray-400 leading-relaxed">GPS · 油耗 · 里程 · 故障码 · 驾驶行为 · 怠速时长 · 设施使用</p>
             </div>
             <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
-              <div className="text-brand-blue-light font-medium mb-1">三方舆情</div>
-              <p className="text-gray-400 leading-relaxed">卡车之家 · 抖音/快手 · 运满满货主反馈</p>
+              <div className="text-brand-blue-light font-medium mb-1">公开舆情</div>
+              <p className="text-gray-400 leading-relaxed">卡车之家 · 抖音/快手 · 运满满货主反馈 + 竞品（解放/重汽/比亚迪）舆情对比</p>
             </div>
             <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
               <div className="text-brand-blue-light font-medium mb-1">内部系统</div>
@@ -636,7 +666,7 @@ function Pilot({ onBack }) { return (
         </div>
         <div className="flex-1">
           <div className="text-sm font-bold text-white mb-1">看板上线与推广</div>
-          <p className="text-xs text-gray-500 mb-3">四屏看板上线 + 闭环追踪 + 方法论文档化，并横向推广至其他产品线</p>
+          <p className="text-xs text-gray-500 mb-3">看板上线 + 闭环追踪 + 方法论文档化，并横向推广至其他产品线</p>
           <div className="grid grid-cols-3 gap-2 text-xs">
             <div className="bg-surface-950 border border-gray-700 rounded-lg p-2.5">
               <div className="text-emerald-400 font-medium mb-1">洞察看板 V1.0</div>
